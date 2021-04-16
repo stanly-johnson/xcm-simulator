@@ -21,7 +21,7 @@ macro_rules! __construct_parachain_runtime {
 				xcm_config = {
 					$crate::frame_support::parameter_types! {
 						pub Network: $crate::xcm::v0::NetworkId = $crate::xcm::v0::NetworkId::Any;
-						pub RelayChainOrigin: Origin = Into::<Origin>::into($crate::cumulus_pallet_xcm_handler::Origin::Relay);
+						pub RelayChainOrigin: Origin = Into::<Origin>::into($crate::cumulus_pallet_xcm::Origin::Relay);
 						pub Ancestry: $crate::xcm::v0::MultiLocation = $crate::xcm::v0::MultiLocation::X1(
 							$crate::xcm::v0::Junction::Parachain {
 								id: <ParachainInfo as $crate::frame_support::traits::Get<_>>::get().into(),
@@ -38,7 +38,7 @@ macro_rules! __construct_parachain_runtime {
 					pub type LocalOriginConverter = (
 						$crate::xcm_builder::SovereignSignedViaLocation<LocationConverter, Origin>,
 						$crate::xcm_builder::RelayChainAsNative<RelayChainOrigin, Origin>,
-						$crate::xcm_builder::SiblingParachainAsNative<$crate::cumulus_pallet_xcm_handler::Origin, Origin>,
+						$crate::xcm_builder::SiblingParachainAsNative<$crate::cumulus_pallet_xcm::Origin, Origin>,
 						$crate::xcm_builder::SignedAccountId32AsNative<Network, Origin>,
 					);
 
@@ -140,7 +140,7 @@ macro_rules! __construct_parachain_runtime {
 
 			$( $xcm_config )*
 
-			impl $crate::cumulus_pallet_xcm_handler::Config for Runtime {
+			impl $crate::cumulus_pallet_xcm::Config for Runtime {
 				type Event = Event;
 				type XcmExecutor = $crate::xcm_executor::XcmExecutor<XcmConfig>;
 				type UpwardMessageSender = MockMessenger;
@@ -164,7 +164,7 @@ macro_rules! __construct_parachain_runtime {
 					// https://github.com/paritytech/substrate/issues/8085
 					System: frame_system::{Pallet, Call, Storage, Config, Event<T>},
 					ParachainInfo: parachain_info::{Pallet, Storage, Config},
-					XcmHandler: cumulus_pallet_xcm_handler::{Pallet, Call, Event<T>, Origin},
+					XcmHandler: cumulus_pallet_xcm::{Pallet, Call, Event<T>, Origin},
 
 					$( $extra_modules )*
 				}
