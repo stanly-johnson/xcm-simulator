@@ -48,9 +48,13 @@ macro_rules! __construct_parachain_runtime {
 						type XcmSender = XcmHandler;
 						type AssetTransactor = ();
 						type OriginConverter = LocalOriginConverter;
-						type IsReserve = $crate::xcm_executor::traits::NativeAsset;
+						type IsReserve = $crate::xcm_builder::NativeAsset;
 						type IsTeleporter = ();
 						type LocationInverter = $crate::xcm_builder::LocationInverter<Ancestry>;
+						type Barrier = ();
+						type Weigher = ();
+						type Trader = ();
+						type ResponseHandler = ();
 					}
 				},
 				extra_config = {
