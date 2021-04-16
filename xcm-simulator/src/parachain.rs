@@ -113,38 +113,44 @@ macro_rules! __construct_parachain_runtime {
 
 			impl $crate::parachain_info::Config for Runtime {}
 
-			pub struct MockMessenger;
-			impl $crate::cumulus_primitives_core::UpwardMessageSender for MockMessenger {
-				fn send_upward_message(
-					msg: $crate::polkadot_parachain::primitives::UpwardMessage
-				) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
-					let _ = <$test_network>::send_ump_msg(ParachainInfo::parachain_id().into(), msg);
-					Ok(0)
-				}
-			}
+			// pub struct MockMessenger;
+			// impl $crate::cumulus_primitives_core::UpwardMessageSender for MockMessenger {
+			// 	fn send_upward_message(
+			// 		msg: $crate::polkadot_parachain::primitives::UpwardMessage
+			// 	) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
+			// 		let _ = <$test_network>::send_ump_msg(ParachainInfo::parachain_id().into(), msg);
+			// 		Ok(0)
+			// 	}
+			// }
 
-			impl $crate::cumulus_primitives_core::XcmpMessageSender for MockMessenger {
-				fn send_xcm_message(
-					dest: $crate::cumulus_primitives_core::ParaId,
-					msg: xcm::VersionedXcm,
-					qos: $crate::cumulus_primitives_core::ServiceQuality
-				) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
-					let _ = <$test_network>::send_hrmp_msg(ParachainInfo::parachain_id().into(), dest.into(), msg);
-					Ok(0)
-				}
+			// impl $crate::cumulus_primitives_core::XcmpMessageSender for MockMessenger {
+			// 	fn send_xcm_message(
+			// 		dest: $crate::cumulus_primitives_core::ParaId,
+			// 		msg: xcm::VersionedXcm,
+			// 		qos: $crate::cumulus_primitives_core::ServiceQuality
+			// 	) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
+			// 		let _ = <$test_network>::send_hrmp_msg(ParachainInfo::parachain_id().into(), dest.into(), msg);
+			// 		Ok(0)
+			// 	}
 
-				fn send_blob_message(
-					dest: $crate::cumulus_primitives_core::ParaId,
-					msg: Vec<u8>,
-					qos: $crate::cumulus_primitives_core::ServiceQuality
-				) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
-					Ok(0)
-				}
-			}
+			// 	fn send_blob_message(
+			// 		dest: $crate::cumulus_primitives_core::ParaId,
+			// 		msg: Vec<u8>,
+			// 		qos: $crate::cumulus_primitives_core::ServiceQuality
+			// 	) -> Result<u32, $crate::cumulus_primitives_core::MessageSendError> {
+			// 		Ok(0)
+			// 	}
+			// }
 
 			$( $xcm_config )*
 
 			impl $crate::cumulus_pallet_xcm::Config for Runtime {}
+
+			impl $crate::cumulus_pallet_xcmp_queue::Config for Runtime {
+				type Event = Event;
+				type XcmExecutor = $crate::xcm_executor::XcmExecutor<XcmConfig>;
+				type ChannelInfo = ();
+			}
 
 			$( $extra_config )*
 
@@ -162,7 +168,7 @@ macro_rules! __construct_parachain_runtime {
 					System: frame_system::{Pallet, Call, Storage, Config, Event<T>},
 					ParachainInfo: parachain_info::{Pallet, Storage, Config},
 					XcmHandler: cumulus_pallet_xcm::{Pallet, Origin},
-
+					XcmpQueue: cumulus_pallet_xcmp_queue::{Pallet, Call, Storage, Event<T>},
 					$( $extra_modules )*
 				}
 			);

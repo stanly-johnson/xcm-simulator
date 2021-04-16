@@ -74,7 +74,7 @@ macro_rules! __construct_relay_chain_runtime {
 				// Use this currency:
 				Balances,
 				// Use this currency when it is a fungible asset matching the given location or name:
-				$crate::xcm_executor::traits::IsConcrete<RocLocation>,
+				$crate::xcm_builder::IsConcrete<RocLocation>,
 				// We can convert the MultiLocations with our converter above:
 				LocationConverter,
 				// Our chain's account ID type (we can't get away without mentioning it explicitly):
