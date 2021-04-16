@@ -588,6 +588,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "cumulus-primitives-utility"
+version = "0.1.0"
+source = "git+https://github.com/paritytech/cumulus?branch=rococo-v1#6ed96321a6b004eb860454087b3a7e278f326eb1"
+dependencies = [
+ "cumulus-primitives-core",
+ "frame-support",
+ "impl-trait-for-tuples",
+ "parity-scale-codec",
+ "polkadot-core-primitives",
+ "polkadot-parachain",
+ "polkadot-primitives",
+ "sp-runtime",
+ "sp-std",
+ "sp-trie",
+ "xcm",
+]
+
+[[package]]
 name = "curve25519-dalek"
 version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1966,6 +1984,20 @@ dependencies = [
  "serde",
  "sp-runtime",
  "sp-std",
+]
+
+[[package]]
+name = "pallet-xcm"
+version = "0.1.0"
+source = "git+https://github.com/paritytech/polkadot?branch=rococo-v1#943038a888bfaf736142642e2610b248f7af486c"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "parity-scale-codec",
+ "serde",
+ "sp-runtime",
+ "sp-std",
+ "xcm",
 ]
 
 [[package]]
@@ -4197,9 +4229,11 @@ dependencies = [
  "cumulus-pallet-parachain-system",
  "cumulus-pallet-xcm",
  "cumulus-primitives-core",
+ "cumulus-primitives-utility",
  "frame-support",
  "frame-system",
  "pallet-balances",
+ "pallet-xcm",
  "parachain-info",
  "parity-scale-codec",
  "paste 1.0.5",

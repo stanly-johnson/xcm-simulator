@@ -140,14 +140,7 @@ macro_rules! __construct_parachain_runtime {
 
 			$( $xcm_config )*
 
-			impl $crate::cumulus_pallet_xcm::Config for Runtime {
-				type Event = Event;
-				type XcmExecutor = $crate::xcm_executor::XcmExecutor<XcmConfig>;
-				type UpwardMessageSender = MockMessenger;
-				type XcmpMessageSender = MockMessenger;
-				type SendXcmOrigin = $crate::frame_system::EnsureRoot<AccountId>;
-				type AccountIdConverter = LocationConverter;
-			}
+			impl $crate::cumulus_pallet_xcm::Config for Runtime {}
 
 			$( $extra_config )*
 
