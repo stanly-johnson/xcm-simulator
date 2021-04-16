@@ -157,7 +157,7 @@ macro_rules! __construct_parachain_runtime {
 					// https://github.com/paritytech/substrate/issues/8085
 					System: frame_system::{Pallet, Call, Storage, Config, Event<T>},
 					ParachainInfo: parachain_info::{Pallet, Storage, Config},
-					XcmHandler: cumulus_pallet_xcm::{Pallet, Call, Event<T>, Origin},
+					XcmHandler: cumulus_pallet_xcm::{Pallet, Origin},
 
 					$( $extra_modules )*
 				}
