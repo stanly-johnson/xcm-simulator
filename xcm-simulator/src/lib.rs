@@ -10,6 +10,7 @@ pub use sp_runtime;
 pub use sp_std;
 
 pub use cumulus_pallet_xcm;
+pub use cumulus_pallet_xcmp_queue;
 pub use cumulus_primitives_core;
 pub use parachain_info;
 pub use polkadot_parachain;
