@@ -11,6 +11,7 @@ pub use sp_std;
 
 pub use cumulus_pallet_parachain_system;
 pub use cumulus_pallet_xcm;
+pub use cumulus_pallet_xcmp_queue;
 pub use cumulus_primitives_core;
 pub use cumulus_primitives_utility;
 pub use parachain_info;

@@ -4401,6 +4401,7 @@ version = "0.0.1-alpha"
 dependencies = [
  "cumulus-pallet-parachain-system",
  "cumulus-pallet-xcm",
+ "cumulus-pallet-xcmp-queue",
  "cumulus-primitives-core",
  "cumulus-primitives-utility",
  "frame-support",
